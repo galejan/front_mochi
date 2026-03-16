@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<context:component-scan base-package="com.todocristal.fabrica.controller" />
+       
+	<mvc:annotation-driven>
+        
+        </mvc:annotation-driven>
+
+       
+        
+        <!--SERVIDOR LOCALHOST ALEX OJO CON PASSWORD ROOT      
+	<bean id="dataSource" 
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/tff" />
+		<property name="username" value="root" />
+		<property name="password" value="root2017/" /> 
+	</bean>  -->      
+        <!--       SERVIDOR BASE DE DATOS FABRICA    --> 
+         <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/tff" />
+		<property name="username" value="android" />
+		<property name="password" value="Fabricasion17/" />
+	</bean>         
+        
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+                                <value>com.todocristal.fabrica.webservice.model.Proyectos</value>
+                                <value>com.todocristal.fabrica.webservice.model.Barras</value>                                
+				<value>com.todocristal.fabrica.webservice.model.Actividades</value> 
+                                <value>com.todocristal.fabrica.webservice.model.Perfiles</value> 
+                                <value>com.todocristal.fabrica.webservice.model.Eventos</value>
+                                <value>com.todocristal.fabrica.webservice.model.Roles</value>
+                                <value>com.todocristal.fabrica.webservice.model.Usuarios</value>
+                                <value>com.todocristal.fabrica.webservice.model.Acciones</value>
+                                <value>com.todocristal.fabrica.webservice.model.StockBarras</value>
+                                <value>com.todocristal.fabrica.webservice.model.LogBarra</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                                <!--<prop key="hibernate.hbm2ddl.import_files">inicioBDD.sql</prop>-->
+			</props>
+		</property>
+	</bean>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+        
+        
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+        <bean id="proyectoDao" class="com.todocristal.fabrica.webservice.dao.ProyectoDaoImpl"></bean>
+        <bean id="proyectoServices" class="com.todocristal.fabrica.webservice.services.ProyectoServicesImpl"></bean>
+	
+        <bean id="actividadDao" class="com.todocristal.fabrica.webservice.dao.ActividadDaoImpl" ></bean>
+        <bean id="actividadServices" class="com.todocristal.fabrica.webservice.services.ActividadServicesImpl" ></bean>
+        
+        <bean id="eventoDao" class="com.todocristal.fabrica.webservice.dao.EventoDaoImpl"></bean>
+        <bean id="eventoServices" class="com.todocristal.fabrica.webservice.services.EventoServicesImpl"></bean>
+        
+        <bean id="rolDao" class="com.todocristal.fabrica.webservice.dao.RolDaoImpl"></bean>
+        <bean id="rolServices" class="com.todocristal.fabrica.webservice.services.RolServicesImpl"></bean>
+        
+        <bean id="usuarioDao" class="com.todocristal.fabrica.webservice.dao.UsuarioDaoImpl"></bean>
+        <bean id="usuarioServices" class="com.todocristal.fabrica.webservice.services.UsuarioServicesImpl"></bean>
+        
+        <bean id="accionDao" class="com.todocristal.fabrica.webservice.dao.AccionDaoImpl"></bean>
+        <bean id="accionServices" class="com.todocristal.fabrica.webservice.services.AccionServicesImpl"></bean>
+        
+        <bean id="barraDao" class="com.todocristal.fabrica.webservice.dao.BarraDaoImpl"></bean>
+        <bean id="barraServices" class="com.todocristal.fabrica.webservice.services.BarraServicesImpl"></bean>
+        
+        <bean id="StockBarrasDao" class="com.todocristal.fabrica.webservice.dao.StockBarrasDaoImpl"></bean>
+        <bean id="StockBarrasServices" class="com.todocristal.fabrica.webservice.services.StockBarrasServicesImpl"></bean>
+        
+        <bean id="logBarraDao" class="com.todocristal.fabrica.webservice.dao.LogBarraDaoImpl"></bean>
+        <bean id="logBarraServices" class="com.todocristal.fabrica.webservice.services.LogBarraServicesImpl"></bean>
+	
+</beans>

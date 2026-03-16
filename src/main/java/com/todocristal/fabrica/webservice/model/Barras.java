@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
@@ -421,7 +421,7 @@ public class Barras implements Serializable, Comparable<Barras> {
     @Override
     public int compareTo(Barras b) {
 
-      // Para carriles y compensadores, se ordena de menor a mayor para poder gastar mas stock de barras pequeñas.
+      // Para carriles y compensadores, se ordena de menor a mayor para poder gastar mas stock de barras pequeï¿½as.
             if (b.getLongitud() < longitud) {
                 return -1;
             } else if (b.getLongitud() > longitud) {
@@ -480,7 +480,7 @@ public class Barras implements Serializable, Comparable<Barras> {
                 int cmp = b1.getTipoPerfil().compareTo(b2.getTipoPerfil());
                 if (cmp != 0) return cmp;
             }
-             // Sección
+             // Secciï¿½n
             if (b1.getPerteneceASeccion() == null && b2.getPerteneceASeccion() != null) return -1;
             if (b1.getPerteneceASeccion() != null && b2.getPerteneceASeccion() == null) return 1;
             if (b1.getPerteneceASeccion() != null && b2.getPerteneceASeccion() != null) {

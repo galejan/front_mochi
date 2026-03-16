@@ -4,7 +4,8 @@ package com.todocristal.fabrica.controller;
 import com.todocristal.fabrica.webservice.auxiliar.StockBarrasAndroid;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.todocristal.fabrica.webservice.model.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -64,7 +65,7 @@ public class RestController {
         @Autowired
         LogBarraServices logBarraServices;
         
-	static final Logger logger = Logger.getLogger(RestController.class);
+	static final Logger logger = LoggerFactory.getLogger(RestController.class);
         Boolean automantenimiento = Boolean.FALSE;  // lo usaremos para poder desactivar el borrado automatico. 
         
         /**
@@ -407,7 +408,7 @@ public class RestController {
 		try {
                     cadenaConsumo = barraServices.mochilificarBarrasByProyecto(referencia, emisor);
                     switch (emisor){
-                        case 0: // Diseño, siempre genera los ficheros de LAC si el pedido es para lacar y esos no tienen demora, no llevan TMP, lo llevaran sus ficheros de corte. Se generan pero pasan a la carpeta ESPERA_PROCES
+                        case 0: // Diseï¿½o, siempre genera los ficheros de LAC si el pedido es para lacar y esos no tienen demora, no llevan TMP, lo llevaran sus ficheros de corte. Se generan pero pasan a la carpeta ESPERA_PROCES
                             
                             break;
                         case 1: // Excell, siempre genera fichero de procesa, ya que es una llamada que se hara para activar el procesamiento de los proyectos. ya sean en stock o porque ha llegado la pintura y activamos el proceso de corte
@@ -547,9 +548,9 @@ public class RestController {
 		return stockBarras;
 	}
         
-        //Migración de grupo de barra, Crear barra, eliminar barra.
-        //NOTA: Se entiende que la longitud de la barra origen y destino no pueden ser la misma en la migración.
-        //No permite bajar de 0 las unidades. Esto permite que si se ha encontrado un desajuste de stock, el propio sistema pueda adaptarse de nuevo sin intervención manual.
+        //Migraciï¿½n de grupo de barra, Crear barra, eliminar barra.
+        //NOTA: Se entiende que la longitud de la barra origen y destino no pueden ser la misma en la migraciï¿½n.
+        //No permite bajar de 0 las unidades. Esto permite que si se ha encontrado un desajuste de stock, el propio sistema pueda adaptarse de nuevo sin intervenciï¿½n manual.
         @RequestMapping(value = "stockbarras/gestor/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Status gestorStockBarras(@RequestBody StockBarrasAndroid barraAndroid) {
@@ -574,7 +575,7 @@ public class RestController {
                             }
                             return new Status(1, "Barra migrada correctamente!");
                         }else{
-                            return new Status(0, "Error en la migración de barra, ambas longitudes iguales!");
+                            return new Status(0, "Error en la migraciï¿½n de barra, ambas longitudes iguales!");
                         }
                     }else if(barraAndroid.getLongitudDestino()!=0){
                         listadoBDD = stockBarraServices.getStockBarras(barraAndroid.getColor(), barraAndroid.getTipoSistema(), barraAndroid.getTipoPerfil());
@@ -582,7 +583,7 @@ public class RestController {
                             if(b.getLongitud().equals(barraAndroid.getLongitudDestino())){
                                 b.setUnidades(b.getUnidades()+barraAndroid.getUnidades());
                                 stockBarraServices.addBarra(b, true);
-                                // TODO AÑADIR LOG DE UNA BARRA AGREGADA
+                                // TODO Aï¿½ADIR LOG DE UNA BARRA AGREGADA
                                 logBarraServices.addLogBarra(new LogBarra(b.getTipoPerfil(),b.getColor(),0,0,0,0,b.getLongitud().intValue(),false,new Timestamp(Calendar.getInstance().getTimeInMillis()),new Timestamp(Calendar.getInstance().getTimeInMillis()),"MOV-A"));
                                 
                                 return new Status(1, "Barra agregada correctamente!");
@@ -595,12 +596,12 @@ public class RestController {
                             if(b.getLongitud().equals(barraAndroid.getLongitudOrigen()) && b.getUnidades()>0){
                                 b.setUnidades(b.getUnidades() - barraAndroid.getUnidades());
                                 stockBarraServices.deleteBarra(b);
-                                // TODO AÑADIR LOG DE UNA BARRA ELIMINADA
+                                // TODO Aï¿½ADIR LOG DE UNA BARRA ELIMINADA
                                 logBarraServices.addLogBarra(new LogBarra(b.getTipoPerfil(),b.getColor(),b.getLongitud().intValue(),0,0,b.getLongitud().intValue(),0,false,new Timestamp(Calendar.getInstance().getTimeInMillis()),new Timestamp(Calendar.getInstance().getTimeInMillis()),"MOV-B"));
                                 return new Status(1, "Barra eliminada correctamente!");
                             }
                         }
-                        return new Status(0, "Error, puede que no dispongas de existencias o exista un problema en la configuración barra: " + barraAndroid.toString());                        
+                        return new Status(0, "Error, puede que no dispongas de existencias o exista un problema en la configuraciï¿½n barra: " + barraAndroid.toString());                        
                     }
 			
 		} catch (Exception e) {
@@ -608,7 +609,7 @@ public class RestController {
                     return new Status(0, e.toString());
 		}
 	}
-        @Deprecated //Dejará de utilizarse para utilizar el stockbarras/gestor 29/04/2019
+        @Deprecated //Dejarï¿½ de utilizarse para utilizar el stockbarras/gestor 29/04/2019
         @RequestMapping(value = "stockbarras/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Status addStockBarras(@RequestBody StockBarras barra) {
@@ -623,7 +624,7 @@ public class RestController {
 		}
 	}
         
-        @Deprecated //Dejará de utilizarse para utilizar el stockbarras/gestor  29/04/2019
+        @Deprecated //Dejarï¿½ de utilizarse para utilizar el stockbarras/gestor  29/04/2019
         @RequestMapping(value = "stockbarras/{id}/delete", method = RequestMethod.POST) //TODO: investsigar para utilizar DELETE
 	public @ResponseBody
 	Status deleteStockBarras(@PathVariable("id") long id) {
@@ -833,7 +834,7 @@ public class RestController {
 
         /**
          * Preparar el proyecto para la llegada de nuevas barras.
-         * 1. Recupera las barras de stock utilizadas (si no están cortadas)
+         * 1. Recupera las barras de stock utilizadas (si no estï¿½n cortadas)
          * 2. Borrar las barras del proyecto (tanto las necesidades como los restos)
          * 3. No debe de quedar ninguna barra del proyecto para la nueva llegada de barras
          * @param proyecto 
@@ -846,7 +847,7 @@ public class RestController {
         }
         
         /**
-         * Bloqueamos la sincronización del proyecto cuando se encuentra la operación de corte en marcha.
+         * Bloqueamos la sincronizaciï¿½n del proyecto cuando se encuentra la operaciï¿½n de corte en marcha.
          * @param p
          * @return 
          */
@@ -854,7 +855,7 @@ public class RestController {
             return Boolean.FALSE;
             
             /*if(p!=null){
-                for(Actividades act : p.getActividades()){  //Comenzado o finalizado la operación de CORTE
+                for(Actividades act : p.getActividades()){  //Comenzado o finalizado la operaciï¿½n de CORTE
                     if(act.getCodigo().equals(10) && act.getEventos()!=null && act.getEventos().size()>0){
                         return Boolean.TRUE;
                     }
