@@ -1,0 +1,8 @@
+/* Minimal reset - App.css handles the rest */
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  text-align: left;
+  min-height: 100vh;
+}
