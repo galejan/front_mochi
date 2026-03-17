@@ -19,6 +19,12 @@ function App() {
   const [loadingBarras, setLoadingBarras] = useState(false);
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [stockBarras, setStockBarras] = useState<number>(0);
+  
+  // Keyword lock system
+  const [isLocked, setIsLocked] = useState(true);
+  const [keywordInput, setKeywordInput] = useState('');
+  const [showKeywordModal, setShowKeywordModal] = useState(false);
+  const UNLOCK_KEYWORD = 'mochi2026'; // Change this to your desired keyword
   const [resumenMochilificacion, setResumenMochilificacion] = useState<{
     totalBarras: number;
     barrasProcesadas: number;
@@ -33,6 +39,32 @@ function App() {
 
   const addLog = (action: string, result: string, success: boolean) => {
     setLogs(prev => [{ id: logId++, action, result, timestamp: new Date(), success }, ...prev]);
+  };
+
+  // Handle keyword unlock
+  const handleKeywordSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (keywordInput === UNLOCK_KEYWORD) {
+      console.log('Desbloqueando...');
+      setIsLocked(false);
+      setKeywordInput('');
+      setTimeout(() => {
+        setShowKeywordModal(false);
+      }, 100);
+      addLog('UNLOCK', 'Acciones desbloqueadas', true);
+    } else {
+      addLog('ERROR', 'Palabra clave incorrecta', false);
+    }
+  };
+
+  // Check if action is allowed
+  const isActionAllowed = () => {
+    if (isLocked) {
+      setShowKeywordModal(true);
+      return false;
+    }
+    return true;
   };
 
   // Calcular resumen de merma teórica
@@ -123,6 +155,7 @@ function App() {
   // ==================== ACCIONES ====================
 
   const handleMochilificar = async (emisor?: number) => {
+    if (!isActionAllowed()) return;
     if (!proyectoSeleccionado) {
       addLog('ERROR', 'Selecciona un proyecto primero', false);
       return;
@@ -144,6 +177,7 @@ function App() {
   };
 
   const handleLiberarBarras = async () => {
+    if (!isActionAllowed()) return;
     if (!proyectoSeleccionado) {
       addLog('ERROR', 'Selecciona un proyecto primero', false);
       return;
@@ -163,6 +197,7 @@ function App() {
   };
 
   const handlePreparaBarras = async () => {
+    if (!isActionAllowed()) return;
     if (!proyectoSeleccionado) {
       addLog('ERROR', 'Selecciona un proyecto primero', false);
       return;
@@ -181,6 +216,7 @@ function App() {
   };
 
   const handleDeleteBarras = async () => {
+    if (!isActionAllowed()) return;
     if (!proyectoSeleccionado) {
       addLog('ERROR', 'Selecciona un proyecto primero', false);
       return;
@@ -199,6 +235,7 @@ function App() {
   };
 
   const handleGeneraFicheroCorte = async () => {
+    if (!isActionAllowed()) return;
     if (!proyectoSeleccionado) {
       addLog('ERROR', 'Selecciona un proyecto primero', false);
       return;
@@ -216,6 +253,7 @@ function App() {
   };
 
   const handleAgregaRestos = async () => {
+    if (!isActionAllowed()) return;
     if (!proyectoSeleccionado) {
       addLog('ERROR', 'Selecciona un proyecto primero', false);
       return;
@@ -235,10 +273,50 @@ function App() {
 
   return (
     <div className="app-container">
+      {/* Keyword Lock Modal */}
+      {showKeywordModal && (
+        <div className="modal-overlay" onClick={() => setShowKeywordModal(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <h3>🔒 Acciones Bloqueadas</h3>
+            <p>Ingresa la palabra clave para desbloquear las acciones:</p>
+            <form onSubmit={handleKeywordSubmit}>
+              <input
+                type="password"
+                value={keywordInput}
+                onChange={(e) => setKeywordInput(e.target.value)}
+                placeholder="Palabra clave"
+                autoFocus
+              />
+              <div className="modal-buttons">
+                <button type="submit" className="btn btn-primary">
+                  Desbloquear
+                </button>
+                <button 
+                  type="button" 
+                  className="btn btn-secondary"
+                  onClick={() => setShowKeywordModal(false)}
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       <header className="header">
         <h1>🛠️ Mochi - Panel de Control</h1>
-        <div className="stock-badge">
-          📦 Stock Total: <strong>{stockBarras}</strong> barras
+        <div className="header-right">
+          <div 
+            className={`auth-badge ${isLocked ? 'locked' : 'authenticated'}`}
+            onClick={() => setShowKeywordModal(true)}
+            title={isLocked ? "Click para desbloquear" : "Acciones desbloqueadas"}
+          >
+            {isLocked ? '🔒 Bloqueado' : '🔓 Desbloqueado'}
+          </div>
+          <div className="stock-badge">
+            📦 Stock Total: <strong>{stockBarras}</strong> barras
+          </div>
         </div>
       </header>
 

@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.todocristal.fabrica.webservice.dao.BarraDao;
 
 import com.todocristal.fabrica.webservice.model.Barras;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BarraServicesImpl implements BarraServices {
 
     @Autowired

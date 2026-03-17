@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.todocristal.fabrica.webservice.dao.EventoDao;
 import com.todocristal.fabrica.webservice.model.Eventos;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class EventoServicesImpl implements EventoServices {
 
 	@Autowired

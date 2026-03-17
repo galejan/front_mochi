@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.todocristal.fabrica.webservice.dao.LogBarraDao;
 import com.todocristal.fabrica.webservice.model.LogBarra;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class LogBarraServicesImpl implements LogBarraServices {
 
     @Autowired

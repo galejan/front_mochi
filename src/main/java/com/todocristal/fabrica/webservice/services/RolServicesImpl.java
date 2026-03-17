@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.todocristal.fabrica.webservice.dao.RolDao;
 import com.todocristal.fabrica.webservice.model.Roles;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class RolServicesImpl implements RolServices {
 
 	@Autowired

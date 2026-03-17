@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.todocristal.fabrica.webservice.dao.PerfilDao;
 import com.todocristal.fabrica.webservice.model.Perfiles;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class PerfilServicesImpl implements PerfilServices {
 
 	@Autowired

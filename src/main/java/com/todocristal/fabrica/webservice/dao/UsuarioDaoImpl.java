@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.todocristal.fabrica.webservice.model.Usuarios;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UsuarioDaoImpl implements UsuarioDao {
 
 	@Autowired                

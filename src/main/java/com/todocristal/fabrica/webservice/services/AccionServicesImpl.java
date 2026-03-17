@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.todocristal.fabrica.webservice.dao.AccionDao;
 import com.todocristal.fabrica.webservice.model.Acciones;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class AccionServicesImpl implements AccionServices {
 
 	@Autowired

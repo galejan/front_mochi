@@ -8,7 +8,9 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.todocristal.fabrica.webservice.model.Actividades;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ActividadDaoImpl implements ActividadDao {
 
 	@Autowired
@@ -113,7 +115,7 @@ public class ActividadDaoImpl implements ActividadDao {
                 tx.commit();
 		session.close(); 
                 return actividades;
-                //LA SIGUIENTE PARTE DEL CÓDIGO SÓLO FUNCIONA CUANDO PODAMOS RECOGER LOS DATOS DE GETACTIVIDADES()
+                //LA SIGUIENTE PARTE DEL Cï¿½DIGO Sï¿½LO FUNCIONA CUANDO PODAMOS RECOGER LOS DATOS DE GETACTIVIDADES()
 		/*Proyectos proyecto = (Proyectos) session.createCriteria(Proyectos.class)
                             .add(Restrictions.eq("referencia", new String(referencia.toString())))
                             .uniqueResult();                

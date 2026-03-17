@@ -8,7 +8,9 @@ import com.todocristal.fabrica.webservice.dao.ProyectoDao;
 
 import com.todocristal.fabrica.webservice.model.Proyectos;
 import javax.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProyectoServicesImpl implements ProyectoServices {
 
 	@Autowired

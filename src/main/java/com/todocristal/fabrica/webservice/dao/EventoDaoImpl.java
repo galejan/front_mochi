@@ -9,7 +9,9 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.todocristal.fabrica.webservice.model.Eventos;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class EventoDaoImpl implements EventoDao {
 
 	@Autowired
@@ -88,7 +90,7 @@ public class EventoDaoImpl implements EventoDao {
 
         /*
             Listado de eventos realizados por un usuario determinado en la actividad, OK
-        Nota:  no están prefiltradas por los criterios createAlias.
+        Nota:  no estï¿½n prefiltradas por los criterios createAlias.
         */
         @Override
         public List<Eventos> getEventoByActividadUsuario(long id, String usuario) throws Exception {

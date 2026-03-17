@@ -12,7 +12,9 @@ import java.util.Calendar;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class LogBarraDaoImpl implements LogBarraDao {
 
 	@Autowired

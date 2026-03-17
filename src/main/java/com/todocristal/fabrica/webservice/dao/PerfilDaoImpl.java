@@ -9,7 +9,9 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.todocristal.fabrica.webservice.model.Acciones;
 import com.todocristal.fabrica.webservice.model.Perfiles;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class PerfilDaoImpl implements PerfilDao {
 
 	@Autowired

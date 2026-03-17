@@ -17,6 +17,7 @@ import javax.transaction.Transactional;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 import utilidades.Mochilificador;
 //AYUDA
@@ -29,15 +30,19 @@ public class BarraDaoImpl implements BarraDao {
     @Autowired
     SessionFactory sessionFactory;
     
+    @Lazy
     @Autowired
     StockBarrasServices stockBarrasService;
     
+    @Lazy
     @Autowired
     BarraServices barraServices;
     
+    @Lazy
     @Autowired
     LogBarraServices logBarraServices;  
     
+    @Lazy
     @Autowired
     ProyectoServices proyectoServices;    
 
@@ -66,8 +71,8 @@ public class BarraDaoImpl implements BarraDao {
             return barra;
     }
     /*
-        --------   OBTENEMOS INFORMACIÓN SEGÚN LA REFERENCIA, ASÍ PODEMOS OBTENER EL ID PARA TRATAR EL PROYECTO Y LAS TAREAS.
-        EN LA SINCRONIZACIÓN.
+        --------   OBTENEMOS INFORMACIï¿½N SEGï¿½N LA REFERENCIA, ASï¿½ PODEMOS OBTENER EL ID PARA TRATAR EL PROYECTO Y LAS TAREAS.
+        EN LA SINCRONIZACIï¿½N.
     */
     @Override
     public List<Barras> getBarrasByProyecto(String referencia) throws Exception{
@@ -564,15 +569,15 @@ public class BarraDaoImpl implements BarraDao {
                     if (status10mm){
                         auxColores.add("9010");  // Blanco (italia)
                         auxColores.add("8017");  // Chocolate
-                        auxColores.add("7035"); // Añadido 121121
-                        auxColores.add("7016"); // añadido 121121
+                        auxColores.add("7035"); // Aï¿½adido 121121
+                        auxColores.add("7016"); // aï¿½adido 121121
                         auxColores.add("XXXX"); // Crudo
                         auxColores.add("AN0001"); // Anodizado Bronze
                         auxColores.add("AN0002"); // " Plata
                         auxColores.add("AN0004"); // " Negro Mate
                         auxColores.add("AN0006"); // " Acero Inox
                         auxColores.add("1013"); // Blanco Perla
-                        auxColores.add("ES0006"); // AÑADIDO AL MOCHI EL 06102025 
+                        auxColores.add("ES0006"); // Aï¿½ADIDO AL MOCHI EL 06102025 
                         //auxColores.add("9005"); // Es el 9005 Mate que sustituye al ES0006
                     }
                     break;

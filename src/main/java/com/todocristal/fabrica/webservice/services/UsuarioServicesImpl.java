@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.todocristal.fabrica.webservice.dao.UsuarioDao;
 import com.todocristal.fabrica.webservice.model.Usuarios;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class UsuarioServicesImpl implements UsuarioServices {
 
 	@Autowired

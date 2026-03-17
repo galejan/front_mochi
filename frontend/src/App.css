@@ -515,3 +515,94 @@ body {
   background: rgba(74, 222, 128, 0.2);
   color: var(--success);
 }
+
+/* Header Right */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Auth Badge */
+.auth-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: default;
+}
+
+.auth-badge.authenticated {
+  background: rgba(74, 222, 128, 0.2);
+  color: var(--success);
+  cursor: pointer;
+}
+
+.auth-badge.authenticated:hover {
+  background: rgba(74, 222, 128, 0.3);
+}
+
+.auth-badge.locked {
+  background: rgba(248, 113, 113, 0.2);
+  color: var(--error);
+  cursor: pointer;
+}
+
+.auth-badge.locked:hover {
+  background: rgba(248, 113, 113, 0.3);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 12px;
+  min-width: 300px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.modal h3 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+.modal p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.modal input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 2px solid var(--bg-panel);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}

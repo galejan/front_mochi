@@ -8,7 +8,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.todocristal.fabrica.webservice.model.Acciones;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class AccionDaoImpl implements AccionDao {
 
 	@Autowired

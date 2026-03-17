@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.todocristal.fabrica.webservice</groupId>
 	<artifactId>web-service-fabrica</artifactId>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<version>2.0.0-SNAPSHOT</version>
 	<name>Mochi - Optimizador de cortes de aluminio</name>
 	<description>Backend del optimizador de cortes de aluminio para Todocristal</description>
@@ -32,26 +32,27 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-data-jpa</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
-		<!-- Hibernate -->
+		<!-- Hibernate with Spring ORM -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
 		</dependency>
 
 		<!-- MySQL -->

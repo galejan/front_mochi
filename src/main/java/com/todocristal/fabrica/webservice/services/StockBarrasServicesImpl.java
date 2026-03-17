@@ -10,7 +10,9 @@ import com.todocristal.fabrica.webservice.model.StockBarras;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import javax.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StockBarrasServicesImpl implements StockBarrasServices {
 
     @Autowired
@@ -162,9 +164,9 @@ public class StockBarrasServicesImpl implements StockBarrasServices {
         for(int i=0 ; i<listaColores.size();i++){
             resultado += listaColores.get(i) + "<br>" + listaCadenaResumenColor.get(i)+"<br>";
         }
-        return  resultado + "<br>Metros totales de stockbarras en inventario CARRIL (" + totalMetrosCarril +"ML) en un número de barras de " +totalBarrasCarril
-                + "<br>Metros totales de stockbarras en inventario CARRILPLUS (" + totalMetrosCarrilPlus +"ML) en un número de barras de " +totalBarrasCarrilPlus
-                +".<br>  Metros totales de stockbarras en inventario COMPENSADOR (" + totalMetrosCompensador +"ML) en un número de barras de " + totalBarrasCompensador;
+        return  resultado + "<br>Metros totales de stockbarras en inventario CARRIL (" + totalMetrosCarril +"ML) en un nï¿½mero de barras de " +totalBarrasCarril
+                + "<br>Metros totales de stockbarras en inventario CARRILPLUS (" + totalMetrosCarrilPlus +"ML) en un nï¿½mero de barras de " +totalBarrasCarrilPlus
+                +".<br>  Metros totales de stockbarras en inventario COMPENSADOR (" + totalMetrosCompensador +"ML) en un nï¿½mero de barras de " + totalBarrasCompensador;
         
     }
     
